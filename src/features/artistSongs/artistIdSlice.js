@@ -11,7 +11,7 @@ export const artistIdSlice = createSlice({
   initialState,
   reducers: {
     getIdSuccess(state, action) {
-      state.artistId.name = action.payload;
+      state.artistId = action.payload;
       state.status = 'succeeded';
     },
     getIdFailed(state, action) {

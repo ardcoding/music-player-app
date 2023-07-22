@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSongs } from '../features/songs/songsAsyncActions';
-import { Link } from 'react-router-dom';
 import { addSong } from '../features/playList/playListSlice';
+import { Button } from '@mui/material';
+import { Favorite } from '@mui/icons-material';
 
 const Songs = () => {
   const songs = useSelector((state) => state.songs.songs);
@@ -28,7 +29,7 @@ const Songs = () => {
         songs.map((song, index) => (
           
           <div key={index} className='mx-4 mt-6 my-2'>
-            <Link to={`/detail/${song.id}`} preventScrollReset={true}>
+            <a href={`/detail/${song.id}`}>
             <img
               alt={song.name}
               src={song.album.images[0].url}
@@ -37,8 +38,8 @@ const Songs = () => {
             />
             <h1>{song.name}</h1>
             <p>{song.artists[0].name}</p>
-            </Link>
-            <button onClick={() => addToPlaylist(song.id)}>Ekle</button>
+            </a>
+            <Button style={{borderColor:"purple", color:"purple"}} variant="outlined" startIcon={<Favorite className='text-purple-500' />} onClick={() => addToPlaylist(song.id)}>Ekle</Button>
           </div>
 
         ))}

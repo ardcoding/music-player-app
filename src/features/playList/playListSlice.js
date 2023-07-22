@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  myfavs: [],
+};
+
 const playlistSlice = createSlice({
   name: "playlist",
-  initialState: [], 
+  initialState, 
   reducers: {
    
     addSong: (state, action) => {
-      state.push(action.payload); 
-      console.log(action.payload)
+      state.myfavs = [...state.myfavs, action.payload]; 
     },
    
     removeSong: (state, action) => {
-      return state.filter((songId) => songId !== action.payload); 
+      state.myfavs= state.myfavs.filter((songId) => songId !== action.payload); 
     },
   },
 });

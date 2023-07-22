@@ -1,19 +1,57 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import logo from "./../img/logo.jpg"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-const navigation = [
-    { name: 'Top Songs', href: '#', current: true },
-    { name: 'Explore', href: '#', current: false },
-    { name: 'My Favorites', href: '/favorites', current: false },
-  ]
-  
+import { Link } from 'react-router-dom'
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
   
-export default class Navbar extends Component {
-  render() {
+const Navbar = () => {
+  const [navigation, setNavigation] = useState([
+    { name: 'Top Songs', to: '/', current: true },
+    { name: 'Explore', to: '/explore', current: false },
+    { name: 'My Favorites', to: "/favorites", current: false },
+  ]);
+
+  var pathname = (uri) => {
+    switch (window.location.pathname) {
+      case "/":
+        setNavigation([
+          { name: 'Top Songs', to: '/', current: true },
+          { name: 'Explore', to: '/explore', current: false },
+          { name: 'My Favorites', to: "/favorites", current: false },
+        ]);
+        break;
+
+      case "/explore":
+        setNavigation([
+          { name: 'Top Songs', to: '/', current: false },
+          { name: 'Explore', to: '/explore', current: true },
+          { name: 'My Favorites', to: "/favorites", current: false },
+        ]);
+        break;
+
+      case "/favorites":
+        setNavigation([
+          { name: 'Top Songs', to: '/', current: false },
+          { name: 'Explore', to: '/explore', current: false },
+          { name: 'My Favorites', to: "/favorites", current: true },
+        ]);
+        break;
+      default:
+        setNavigation([
+          { name: 'Top Songs', to: '/', current: false },
+          { name: 'Explore', to: '/explore', current: false },
+          { name: 'My Favorites', to: "/favorites", current: false },
+        ]);
+    }
+  };
+
+  
+
+
     return (
 <Disclosure as="nav" className="bg-purple-800">
       {({ open }) => (
@@ -35,25 +73,26 @@ export default class Navbar extends Component {
                   <img
                     className="h-8 w-auto rounded-full mx-auto"
                     src= {logo}
-                    alt="Your Company"
+                    alt="Music Player App"
                   />
                 </div>
                 <div className="hidden sm:ml-2 sm:block">
     
                   <div className="flex space-x-4">
-                  <p className='rounded-md mr-4 px-1 text-sm font-medium text-white text-3xl'>Music Player App</p>
+                  <p className='rounded-md mr-4 px-2 py-1 font-medium text-white text-2xl'>Music Player App</p>
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.to}
                         className={classNames(
                           item.current ? 'bg-purple-900 text-white' : 'text-purple-300 hover:bg-purple-700 hover:text-white',
                           'rounded-md px-3 py-2 font-medium text-lg'
                         )}
                         aria-current={item.current ? 'page' : undefined}
+                        onClick={pathname(item.to)}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -103,4 +142,4 @@ export default class Navbar extends Component {
     </Disclosure>
     )
   }
-}
+export default Navbar

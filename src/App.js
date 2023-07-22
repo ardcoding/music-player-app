@@ -6,6 +6,7 @@ import { store } from "./store"
 import { Route, Routes } from "react-router-dom";
 import Details from "./components/Details";
 import Playlist from "./components/PlayList";
+import Explore from "./components/Explore";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Route exact path="/" element={<Body />} />
       <Route exact path="/detail/:id" element={<Details />} />
       <Route path="/favorites" element={<Playlist />} />
+      <Route path="/explore" element={<Explore />} />
       </Routes>
     </Provider>
   );

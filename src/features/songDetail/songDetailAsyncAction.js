@@ -12,7 +12,7 @@ export const fetchDetails = createAsyncThunk(
         method: 'GET',
         headers: {
           'X-RapidAPI-Key':
-            'a2b2a3ea26msh1a33311b6569c95p1146dcjsn74d969fa838b',
+            '6020745c03mshde5289117b51ab6p146346jsn1629a1d281bd',
           'X-RapidAPI-Host': 'spotify81.p.rapidapi.com',
         },
       };

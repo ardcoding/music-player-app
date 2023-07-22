@@ -4,10 +4,11 @@ import ArtistSong from './ArtistSongs'
 
 const Details = () => {
     return (
-      <>
-      <SongDetail />
-      <ArtistSong />
-      </>
+
+            <div className='w-10/12 m-auto flex'>
+            <SongDetail className='w-3/12'/>
+            <ArtistSong className="w-7/12"/>
+          </div>
     )
     
   

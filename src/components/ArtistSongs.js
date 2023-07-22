@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArtist } from "../features/artistSongs/artistSongsDetailAsyncAction";
 import { useParams } from "react-router-dom";
-import { fetchDetails } from "../features/songDetail/songDetailAsyncAction";
 
 const ArtistSong = () => {
     const artist = useSelector((state) => state.artistId.artistId);
@@ -12,23 +11,24 @@ const ArtistSong = () => {
     const { id } = useParams();
     useEffect(() => {
       if (status === 'idle') {
-        dispatch(fetchArtist(id));
+        dispatch(fetchArtist(artist));
       }
-    }, [id, dispatch]);
+    }, [id,artist,status, dispatch]);
 
     return (
-        <div className='flex flex-wrap w-9/12 mt-8 m-auto'>
+        <div className=''>
+          <h1 className="text-center my-4 text-xl">More From Artist</h1>
           {status === 'succeeded' &&
-              <div className='mx-4 mt-6 my-2'>
-                {/* <div className="float-left">
-                <h1 className="text-center text-2xl">{artist.name}</h1>
-                <img src={details.album.images[0].url} alt={artist.name} width={450} height={450}/>
-                <p className="text-center text-lg">{art.artists[0].name}</p>
+          
+          artist.data.artist.discography.singles.items.map( (single, index) => 
+              <div className='mx-4 mt-6 '>
+                <div className="">
+                <img className="float-left" key={index} alt={single.releases.items[0].name} src={single.releases.items[0].coverArt.sources[0].url} width={50} height={50} />
+                <p className="text-center text-md">{single.releases.items[0].name}</p><br/>
+                <hr style={{borderWidth:"1px"}}/>
                 </div>
-                <div>
-                    <audio className="m-auto" src={details.preview_url} controls/>
-                </div> */}
               </div>
+          )
             }
           {status === 'failed' && <p>{error}</p>}
         </div>

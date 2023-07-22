@@ -4,6 +4,7 @@ import detailsReducer from './features/songDetail/songDetailSlice';
 import topSongsReducer from './features/topSongs/topSongsSlice';
 import artistIdReducer from './features/artistSongs/artistIdSlice';
 import playListReducer from './features/playList/playListSlice';
+import trSongsReducer from './features/explore/exploreSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     topsongs: topSongsReducer,
     details: detailsReducer,
     artistId: artistIdReducer,
-    playlist: playListReducer
+    playlist: playListReducer,
+    moresongs: trSongsReducer
   },
   
 });

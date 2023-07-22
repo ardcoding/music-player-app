@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getTopSongsSuccess, getTopSongsFailed } from './topSongsSlice';
+import { getTrSongsSuccess, getTrSongsFailed } from './exploreSlice';
 
-export const fetchTopSongs = createAsyncThunk(
-  'topSongs/fetchTopSongs',
+export const fetchMoreSongs = createAsyncThunk(
+  'explore/fetchMoreSongs',
   async (arg, thunkAPI) => {
     try {
       const url = 'https://spotify81.p.rapidapi.com/top_200_tracks?country=TR';
@@ -17,9 +17,9 @@ export const fetchTopSongs = createAsyncThunk(
       const response = await fetch(url, options);
       const data = await response.json();      
       console.log(data)
-      thunkAPI.dispatch(getTopSongsSuccess(data.slice(0, 20)));
+      thunkAPI.dispatch(getTrSongsSuccess(data.slice(0,20)));
     } catch (error) {
-      thunkAPI.dispatch(getTopSongsFailed(error.message));
+      thunkAPI.dispatch(getTrSongsFailed(error.message));
     }
   }
 );
